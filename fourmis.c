@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "fourmis.h"
 #include <stdbool.h>
+#include <time.h>
 
 /* Table de vérité
    
