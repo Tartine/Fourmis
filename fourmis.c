@@ -1,8 +1,9 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include "fourmis.h"
-#include <stdbool.h>
-#include <time.h>
+#include  <stdlib.h>
+#include  <stdio.h>
+#include  "fourmis.h"
+#include  <stdbool.h>
+#include  <time.h>
+#include  <string.h>
 
 /* Table de vérité
    
@@ -14,12 +15,17 @@
 */
 
 unsigned short pheromoneFourmil[X][Y];
-unsigned short pheromoneFood[X][Y] = {0};
-unsigned short food[X][Y] = {0};
+unsigned short pheromoneFood[X][Y];
+unsigned short food[X][Y];
 
 
-void matrix_init(){
+void matrix_init(void){
 	// TODO use pointers
+  
+  // initialize pheromoneFood and food to 0 using memset :
+  memset(pheromoneFood, 0, sizeof(pheromoneFood));
+  memset(food, 0, sizeof(food));
+
 	int i,j;
 
 	// antfarm init, antfarm is in the right-bottom corner
