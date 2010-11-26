@@ -10,7 +10,7 @@
 #define FOOD_Y 50
 #define ANTFARM_X (X-20)
 #define ANTFARM_Y (Y-20)
-
+#define MAX_RANDOM 10
 
 typedef struct ant {
 	unsigned short x;

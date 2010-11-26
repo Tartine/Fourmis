@@ -7,9 +7,9 @@
    
    1    2    3
 
-   4         5
+   8         4
    
-   6    7    8
+   7    6    5
 */
 
 unsigned short pheromoneFourmil[X][Y];
@@ -48,7 +48,7 @@ short moveWithFood(unsigned short x, unsigned short y){
 	short direction = 0;
 	short current = pheromoneFourmil[x][y];
 
-	//check for position 1,2,3,4,5,6,7,8...
+	//check for position 1,2,3,8,4,7,6,5...
 	if(pheromoneFourmil[x-1][y-1] > current){
 		current = pheromoneFourmil[x-1][y-1];
 		direction = 1;
@@ -63,33 +63,53 @@ short moveWithFood(unsigned short x, unsigned short y){
 	}
 	if(pheromoneFourmil[x][y-1] > current){
 		current = pheromoneFourmil[x][y-1];
-		direction = 4;
+		direction = 8;
 	}
 	if(pheromoneFourmil[x][y+1] > current){
 		current = pheromoneFourmil[x][y+1];
-		direction = 5;
+		direction = 4;
 	}
 	if(pheromoneFourmil[x+1][y-1] > current){
 		current = pheromoneFourmil[x+1][y-1];
-		direction = 6;
+		direction = 7;
 	}
 	if(pheromoneFourmil[x+1][y] > current){
 		current = pheromoneFourmil[x+1][y];
-		direction = 7;
+		direction = 6;
 	}
 	if(pheromoneFourmil[x+1][y+1] > current){
 		current = pheromoneFourmil[x+1][y-1];
-		direction = 8;
+		direction = 5;
 	}
 
 	return direction;
 }
 
 
+
 short moveWithoutFood(unsigned short x, unsigned short y, unsigned short lastMovement){
+
 	// So, for the movements, we'll use some random stuff and ponderate it,
 	// many conditions....we must add a check too to check if there is any 
 	// pheromones near the ant and if there is any, follow them.
+  
+  // So, here we are, we first init random seed with the current
+  // // So, here we are, we first init random seed with the current time
+  srand(time(NULL));
+  short i;
+  const unsigned short max_ponderate = 4;
+  unsigned char ponderate[8] = {0};
+
+  // for numbers >= lastMovement
+  for ( i = 0; i <= 4 ; i++) {
+    ponderate[(lastMovement+i-1)%8] = max_ponderate - i;
+  }
+
+  // now for numbers < lastMovement
+  for ( i = 0; i <= 2; i++) {
+    ponderate[(lastMovement-i+4)%8] = max_ponderate - (i+1);
+  }
+
 
   return EXIT_SUCCESS;
 }
