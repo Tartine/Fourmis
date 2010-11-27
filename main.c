@@ -3,25 +3,25 @@
 #include <SDL/SDL.h>
 #include <stdbool.h>
 #include "image.h"
-#define X 800
-#define Y 600
-
+#include "fourmis.h"
 
 int main ( int argc, char* argv[] )
 {
+    SDL_Surface* screen = NULL;
     SDL_Surface* fond = NULL;
     SDL_Surface* sucre = NULL;
+    SDL_Surface* antfarm = NULL;
+    ant_t *ant;
 
-    // initialize SDL video
+
+
     if ( SDL_Init( SDL_INIT_VIDEO ) < 0 )
     {
         printf( "Unable to init SDL: %s\n", SDL_GetError() );
         return 1;
     }
 
-    atexit(SDL_Quit);
-
-    SDL_Surface* screen = SDL_SetVideoMode(X, Y, 16, SDL_HWSURFACE|SDL_DOUBLEBUF);
+   screen = SDL_SetVideoMode(X, Y, 16, SDL_HWSURFACE|SDL_DOUBLEBUF);
 
     if ( !screen )
     {
@@ -29,8 +29,13 @@ int main ( int argc, char* argv[] )
         return 1;
     }
 
+    matrix_init();
+
+    atexit(SDL_Quit);
+
     fond = load_image("fond.bmp");
     sucre = load_image("sugar.bmp");
+    antfarm = load_image("Sans titre.bmp");
 
 
     bool done = false;
@@ -58,11 +63,13 @@ int main ( int argc, char* argv[] )
 
         blit_image(0, 0, fond, screen);
         blit_image(50, 50, sucre, screen);
+        blit_image(570, 410, antfarm, screen);
 
         SDL_Flip(screen);
     }
 
     SDL_FreeSurface(fond);
+    SDL_FreeSurface(antfarm);
     SDL_FreeSurface(sucre);
 
     printf("Exited cleanly\n");
