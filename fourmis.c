@@ -41,7 +41,7 @@ void matrix_init(void){
 		}
 	}
 
-	// we now init the sugar in itself
+	// we now init the sugar itself
 	for(i=FOOD_X; i < FOOD_X+FOOD_S_X; i++){
 		for(j=FOOD_Y; j < FOOD_Y+FOOD_S_Y; j++){
 			food[i][j] = 1;
@@ -49,7 +49,7 @@ void matrix_init(void){
 	}
 }
 
-// a function that return the movement the ant must do when it has
+// a function which returns the movement the ant must do when it has
 // some food. (See the "table of vérité" at the beginning).
 short moveWithFood(unsigned short x, unsigned short y){
 	short direction = 0;
@@ -134,5 +134,4 @@ void antMove (ant_t * ant){
 
 int main(void){
   return EXIT_SUCCESS;
-
 };
