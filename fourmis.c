@@ -29,17 +29,23 @@ void matrix_init(void){
 	int i,j;
 
 	// antfarm init, antfarm is in the right-bottom corner
-	for(i=0; i < X; i++){
-		for(j=0; j < Y; j++){
+	for ( i=0; i < X; i++) {
+		for ( j=0; j < Y; j++) {
 			pheromoneFourmil[i][j] = i + j;
 		}
 	}
 	//now we decrease pheromone power paste the antfarm
-	for(i=0; i < X-ANTFARM_X; i++){
-		for(j=0; j < Y-ANTFARM_Y; i++){
-			pheromoneFourmil[i+ANTFARM_X][j+ANTFARM_Y] -= (i+j)*2;
-		}
-	}
+  for ( i=0; i+ANTFARM_X < X ; i++) {
+    for ( j=0; j < Y ; j++) {
+      pheromoneFourmil[i+ANTFARM_X][j] -= 2*(i+j);
+    }
+  }
+
+  for ( i=0; i < X ; i++) {
+    for ( j=0; j+ANTFARM_Y < Y ; j++) {
+      pheromoneFourmil[i][j+ANTFARM_Y] -= 2*(i+j);
+    }
+  }
 
 	// we now init the sugar itself
 	for(i=FOOD_X; i < FOOD_X+FOOD_S_X; i++){
